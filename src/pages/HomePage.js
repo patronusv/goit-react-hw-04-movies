@@ -21,7 +21,10 @@ const HomePage = () => {
             <NavLink
               to={{
                 pathname: '/movies/details',
-                state: { from: location.pathname },
+                state: {
+                  from: location.pathname,
+                  movieId: item.id,
+                },
               }}
             >
               {item.name ? item.name : item.title}

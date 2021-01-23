@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-const MovieGallery = ({ movies }) => {
+const MovieGallery = ({ movies, page }) => {
   const location = useLocation();
   return (
     <ul>
@@ -9,7 +9,11 @@ const MovieGallery = ({ movies }) => {
           <NavLink
             to={{
               pathname: '/movies/details',
-              state: { from: location.pathname },
+              state: {
+                from: location.pathname,
+                movieId: item.id,
+                page: page,
+              },
             }}
           >
             {item.name ? item.name : item.title}

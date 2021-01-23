@@ -6,14 +6,14 @@ export default class ApiServicesClass {
   }
   fetchTrending() {
     return axios
-      .get(`/trending/all/day?api_key=${this.apiKey}`)
+      .get(`/trending/movie/day?api_key=${this.apiKey}`)
       .then(response => response.data.results)
       .catch(error => error);
   }
   fetchMovies(query, page) {
     return axios
       .get(`/search/movie?api_key=${this.apiKey}&language=en-US&query=${query}&page=${page}&include_adult=false`)
-      .then(response => response.data.results)
+      .then(response => response.data)
       .catch(error => error);
   }
   fetchMovieById(id) {
