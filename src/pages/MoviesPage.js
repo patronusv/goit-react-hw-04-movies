@@ -43,8 +43,13 @@ const MoviesPage = () => {
     }));
   };
   useEffect(() => {
-    console.log(`searching for ${location.state.query} page ${location.page}`);
-    location.state.query && getMovies(location.state.query, location.page);
+    // console.log(`searching for ${location.state.query} page ${location.page}`);
+    console.log(location);
+    if (!location.state) {
+      return;
+    } else {
+      location.state.query && getMovies(location.state.query, location.page);
+    }
     // !state.query && setState(prevState);
   }, []);
   const { movies, page } = state;
