@@ -21,11 +21,12 @@ const Cast = () => {
     console.log('after', state);
   };
   const { castToShow, cast } = state;
+
   return (
     <>
       <h2>{location.state.movieId}</h2>
       <ul>{castToShow && castToShow.map(item => <li key={item.cast_id}>{item.name}</li>)}</ul>
-      {cast.length !== castToShow.length && (
+      {castToShow && cast.length !== castToShow.length && (
         <button type="button" onClick={showAllCast}>
           Show all
         </button>

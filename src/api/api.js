@@ -28,9 +28,9 @@ export default class ApiServicesClass {
       .then(response => response.data)
       .catch(error => error);
   }
-  fetchMovieReviewsById(id) {
+  fetchMovieReviewsById(id, page = 1) {
     return axios
-      .get(`movie/${id}/reviews?api_key=${this.apiKey}&language=en-US&page=1`)
+      .get(`movie/${id}/reviews?api_key=${this.apiKey}&language=en-US&page=${page}`)
       .then(response => response.data)
       .catch(error => error);
   }
