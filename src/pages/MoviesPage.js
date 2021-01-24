@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import ApiServicesClass from '../api/api';
 import MovieGallery from '../components/movieGallery/MovieGallery';
+import Pagination from '../components/pagination/Pagination';
 import SearchForm from '../components/searchForm/SearchForm';
 
 const initialState = {
@@ -64,19 +65,9 @@ const MoviesPage = () => {
     <>
       <h2>Movies page</h2>
       <SearchForm getMovies={getMovies} />
-      {movies.length > 0 &&
-        Array.from({ length: state.maxpages }, (v, k) => k + 1).map(item => (
-          <button key={item} type="button" onClick={pagination}>
-            {item}
-          </button>
-        ))}
+      {movies.length > 0 && Array.from({ length: state.maxpages }, (v, k) => k + 1).map(item => <Pagination onClick={pagination} title={item} />)}
       <MovieGallery movies={movies} page={page} query={query} />
-      {movies.length > 0 &&
-        Array.from({ length: state.maxpages }, (v, k) => k + 1).map(item => (
-          <button key={item} type="button" onClick={pagination}>
-            {item}
-          </button>
-        ))}
+      {movies.length > 0 && Array.from({ length: state.maxpages }, (v, k) => k + 1).map(item => <Pagination onClick={pagination} title={item} />)}
     </>
   );
 };
