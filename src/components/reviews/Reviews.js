@@ -26,8 +26,7 @@ const Reviews = () => {
   return (
     <>
       {!results || (!results.length && <h2>We don't have any reviews yet</h2>)}
-      {total_pages &&
-        total_pages > 0 &&
+      {total_pages > 1 &&
         Array.from({ length: total_pages }, (v, k) => k + 1).map(item => (
           <button key={item} type="button" onClick={pagination}>
             {item}

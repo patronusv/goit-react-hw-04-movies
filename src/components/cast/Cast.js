@@ -25,7 +25,16 @@ const Cast = () => {
   return (
     <>
       <h2>{location.state.movieId}</h2>
-      <ul>{castToShow && castToShow.map(item => <li key={item.cast_id}>{item.name}</li>)}</ul>
+      <ul>
+        {castToShow &&
+          castToShow.map(item => (
+            <li key={item.cast_id}>
+              <img src={`https://www.themoviedb.org/t/p/w138_and_h175_face/${item.profile_path}`} alt={`${item.name}`} />
+              <h3>{item.name}</h3>
+              <p>Character: {item.character}</p>
+            </li>
+          ))}
+      </ul>
       {castToShow && cast.length !== castToShow.length && (
         <button type="button" onClick={showAllCast}>
           Show all

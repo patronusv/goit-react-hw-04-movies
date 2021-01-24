@@ -28,15 +28,32 @@ const MovieDetailsPage = () => {
       page: history.location.state.page,
     });
   };
+  const { name, title, release_date, poster_path, id, vote_average, overview, genres } = state;
   return (
     <div>
-      <h2>{state.title ? state.title : state.name}</h2>
       <button type="button" onClick={onGoBack}>
         Shit! go back!
       </button>
+      <div style={{ display: 'flex' }}>
+        <img src={`https://www.themoviedb.org/t/p/w600_and_h900_bestv2${poster_path}`} alt={title ? title : name}></img>
+        <div>
+          <h2>
+            {title ? title : name}({release_date && release_date.slice(0, 4)})
+          </h2>
+          <p>User score: {vote_average * 10}%</p>
+          <h3>Overview</h3>
+          <p>{overview}</p>
+          <h3>Genres</h3>
+          <ul>
+            {genres.map(item => (
+              <li key={item.id}>{item.name}</li>
+            ))}
+          </ul>
+        </div>
+      </div>
       <NavLink
         to={{
-          pathname: `/movies/${state.id}/cast`,
+          pathname: `/movies/${id}/cast`,
           state: { ...location.state },
         }}
         exact
