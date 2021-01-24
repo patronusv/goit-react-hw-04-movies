@@ -14,6 +14,7 @@ const MovieDetailsPage = () => {
   };
   useEffect(() => {
     getMovieDetails(history.location.state.movieId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const onGoBack = () => {
     console.log(history);

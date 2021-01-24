@@ -51,6 +51,7 @@ const MoviesPage = () => {
       location.state.query && getMovies(location.state.query, location.page);
     }
     // !state.query && setState(prevState);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const { movies, page } = state;
   return (

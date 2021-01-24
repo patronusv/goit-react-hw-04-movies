@@ -1,14 +1,15 @@
 import React from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
+import { Link, useLocation, useRouteMatch } from 'react-router-dom';
 const MovieGallery = ({ movies, page }) => {
   const location = useLocation();
+  const match = useRouteMatch();
   return (
     <ul>
       {movies.map(item => (
         <li key={item.id}>
-          <NavLink
+          <Link
             to={{
-              pathname: '/movies/details',
+              pathname: `${match.url}/${item.id}`,
               state: {
                 from: location.pathname,
                 movieId: item.id,
@@ -17,7 +18,7 @@ const MovieGallery = ({ movies, page }) => {
             }}
           >
             {item.name ? item.name : item.title}
-          </NavLink>
+          </Link>
         </li>
       ))}
     </ul>
