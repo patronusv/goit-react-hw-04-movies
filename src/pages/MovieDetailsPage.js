@@ -35,7 +35,7 @@ const MovieDetailsPage = () => {
   return (
     <div>
       <button type="button" onClick={onGoBack}>
-        Shit! go back!
+        Go back
       </button>
       <div style={{ display: 'flex' }}>
         <img

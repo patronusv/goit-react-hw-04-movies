@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import ApiServicesClass from '../../api/api';
+import Pagination from '../pagination/Pagination';
 const Reviews = () => {
   const [state, setState] = useState({});
   const location = useLocation();
@@ -27,11 +28,7 @@ const Reviews = () => {
     <>
       {!results || (!results.length && <h2>We don't have any reviews yet</h2>)}
       {total_pages > 1 &&
-        Array.from({ length: total_pages }, (v, k) => k + 1).map(item => (
-          <button key={item} type="button" onClick={pagination}>
-            {item}
-          </button>
-        ))}
+        Array.from({ length: total_pages }, (v, k) => k + 1).map(item => <Pagination key={item} onClick={pagination} title={item} />)}
       <ul>
         {results &&
           results.map(item => (
@@ -41,6 +38,8 @@ const Reviews = () => {
             </li>
           ))}
       </ul>
+      {total_pages > 1 &&
+        Array.from({ length: total_pages }, (v, k) => k + 1).map(item => <Pagination key={item} onClick={pagination} title={item} />)}
     </>
   );
 };

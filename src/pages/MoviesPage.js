@@ -65,9 +65,11 @@ const MoviesPage = () => {
     <>
       <h2>Movies page</h2>
       <SearchForm getMovies={getMovies} />
-      {movies.length > 0 && Array.from({ length: state.maxpages }, (v, k) => k + 1).map(item => <Pagination onClick={pagination} title={item} />)}
+      {movies.length > 0 &&
+        Array.from({ length: state.maxpages }, (v, k) => k + 1).map(item => <Pagination key={item} onClick={pagination} title={item} />)}
       <MovieGallery movies={movies} page={page} query={query} />
-      {movies.length > 0 && Array.from({ length: state.maxpages }, (v, k) => k + 1).map(item => <Pagination onClick={pagination} title={item} />)}
+      {movies.length > 0 &&
+        Array.from({ length: state.maxpages }, (v, k) => k + 1).map(item => <Pagination key={item} onClick={pagination} title={item} />)}
     </>
   );
 };
