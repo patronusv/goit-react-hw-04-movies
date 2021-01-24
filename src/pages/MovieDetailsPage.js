@@ -44,11 +44,7 @@ const MovieDetailsPage = () => {
           <h3>Overview</h3>
           <p>{overview}</p>
           <h3>Genres</h3>
-          <ul>
-            {genres.map(item => (
-              <li key={item.id}>{item.name}</li>
-            ))}
-          </ul>
+          <ul>{genres && genres.map(item => <li key={item.id}>{item.name}</li>)}</ul>
         </div>
       </div>
       <NavLink
