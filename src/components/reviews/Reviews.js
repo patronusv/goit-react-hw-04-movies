@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import ApiServicesClass from '../../api/api';
 import Pagination from '../pagination/Pagination';
+import PaginationWrapper from '../pagination/PaginationWrapperStyled';
+import ReviewsWrapper from './ReviewsStyled';
 const Reviews = () => {
   const [state, setState] = useState({});
   const location = useLocation();
@@ -25,22 +27,26 @@ const Reviews = () => {
   };
   const { results, total_pages } = state;
   return (
-    <>
-      {!results || (!results.length && <h2>We don't have any reviews yet</h2>)}
-      {total_pages > 1 &&
-        Array.from({ length: total_pages }, (v, k) => k + 1).map(item => <Pagination key={item} onClick={pagination} title={item} />)}
-      <ul>
+    <ReviewsWrapper>
+      <PaginationWrapper>
+        {!results || (!results.length && <h2>We don't have any reviews yet</h2>)}
+        {total_pages > 1 &&
+          Array.from({ length: total_pages }, (v, k) => k + 1).map(item => <Pagination key={item} onClick={pagination} title={item} />)}
+      </PaginationWrapper>
+      <ul className="list">
         {results &&
           results.map(item => (
-            <li key={item.id}>
+            <li className="reviewsListItem" key={item.id}>
               <h3>{item.author}</h3>
               <p>{item.content}</p>
             </li>
           ))}
       </ul>
-      {total_pages > 1 &&
-        Array.from({ length: total_pages }, (v, k) => k + 1).map(item => <Pagination key={item} onClick={pagination} title={item} />)}
-    </>
+      <PaginationWrapper>
+        {total_pages > 1 &&
+          Array.from({ length: total_pages }, (v, k) => k + 1).map(item => <Pagination key={item} onClick={pagination} title={item} />)}
+      </PaginationWrapper>
+    </ReviewsWrapper>
   );
 };
 

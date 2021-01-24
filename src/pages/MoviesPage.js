@@ -3,6 +3,7 @@ import { useHistory, useLocation } from 'react-router-dom';
 import ApiServicesClass from '../api/api';
 import MovieGallery from '../components/movieGallery/MovieGallery';
 import Pagination from '../components/pagination/Pagination';
+import PaginationWrapper from '../components/pagination/PaginationWrapperStyled';
 import SearchForm from '../components/searchForm/SearchForm';
 
 const initialState = {
@@ -63,13 +64,16 @@ const MoviesPage = () => {
   const { movies, page, query } = state;
   return (
     <>
-      <h2>Movies page</h2>
       <SearchForm getMovies={getMovies} />
-      {movies.length > 0 &&
-        Array.from({ length: state.maxpages }, (v, k) => k + 1).map(item => <Pagination key={item} onClick={pagination} title={item} />)}
+      <PaginationWrapper>
+        {movies.length > 0 &&
+          Array.from({ length: state.maxpages }, (v, k) => k + 1).map(item => <Pagination key={item} onClick={pagination} title={item} />)}
+      </PaginationWrapper>
       <MovieGallery movies={movies} page={page} query={query} />
-      {movies.length > 0 &&
-        Array.from({ length: state.maxpages }, (v, k) => k + 1).map(item => <Pagination key={item} onClick={pagination} title={item} />)}
+      <PaginationWrapper>
+        {movies.length > 0 &&
+          Array.from({ length: state.maxpages }, (v, k) => k + 1).map(item => <Pagination key={item} onClick={pagination} title={item} />)}
+      </PaginationWrapper>
     </>
   );
 };

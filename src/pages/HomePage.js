@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import ApiServicesClass from '../api/api';
+import HomepageWrapper from './HomePageStyled';
 const HomePage = () => {
   const [trending, setTrending] = useState([]);
   const api = new ApiServicesClass();
@@ -14,10 +15,10 @@ const HomePage = () => {
   }, []);
   const location = useLocation();
   return (
-    <div>
-      <ul style={{ display: 'flex', flexWrap: 'wrap' }}>
+    <HomepageWrapper>
+      <ul className="list homepageGallery">
         {trending.map(item => (
-          <li key={item.id}>
+          <li className="homepageItem" key={item.id}>
             <NavLink
               to={{
                 pathname: `/movies/${item.id}`,
@@ -26,15 +27,20 @@ const HomePage = () => {
                   movieId: item.id,
                 },
               }}
+              className="homepageLink"
             >
-              <img src={`https://www.themoviedb.org/t/p/w220_and_h330_face${item.poster_path}`} alt={item.name ? item.name : item.title}></img>
+              <img
+                className="homepageImg"
+                src={`https://www.themoviedb.org/t/p/w220_and_h330_face${item.poster_path}`}
+                alt={item.name ? item.name : item.title}
+              ></img>
               <h3>{item.name ? item.name : item.title}</h3>
             </NavLink>
-            <p>{item.release_date}</p>
+            <p className="homepageText">{item.release_date}</p>
           </li>
         ))}
       </ul>
-    </div>
+    </HomepageWrapper>
   );
 };
 

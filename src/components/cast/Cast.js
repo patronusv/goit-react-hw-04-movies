@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import ApiServicesClass from '../../api/api';
+import CastWrapper from './CastStyled';
 const Cast = () => {
   const [state, setState] = useState({});
   const location = useLocation();
@@ -23,13 +24,13 @@ const Cast = () => {
   const { castToShow, cast } = state;
 
   return (
-    <>
-      <h2>{location.state.movieId}</h2>
-      <ul>
+    <CastWrapper>
+      <ul className="castList">
         {castToShow &&
           castToShow.map(item => (
-            <li key={item.cast_id}>
+            <li className="castListItem" key={item.cast_id}>
               <img
+                className="castListImg"
                 src={
                   item.profile_path
                     ? `https://www.themoviedb.org/t/p/w138_and_h175_face/${item.profile_path}`
@@ -39,17 +40,17 @@ const Cast = () => {
                 width="138"
                 height="175"
               />
-              <h3>{item.name}</h3>
-              <p>Character: {item.character}</p>
+              <h3 className="castListTitle">{item.name}</h3>
+              <p className="castListText">Character: {item.character}</p>
             </li>
           ))}
       </ul>
       {castToShow && cast.length !== castToShow.length && (
-        <button type="button" onClick={showAllCast}>
+        <button className="Button" type="button" onClick={showAllCast}>
           Show all
         </button>
       )}
-    </>
+    </CastWrapper>
   );
 };
 

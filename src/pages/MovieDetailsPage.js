@@ -4,6 +4,7 @@ import { NavLink, Route, Switch, useHistory, useLocation, useRouteMatch } from '
 // import Cast from '../components/cast/Cast';
 // import Reviews from '../components/reviews/Reviews';
 import movieDetailsRoutes from '../routes/movieDetailsRoutes';
+import MovieDetailsWrapper from './MovieDetailsPageStyled';
 
 const MovieDetailsPage = () => {
   const [state, setState] = useState({});
@@ -33,12 +34,13 @@ const MovieDetailsPage = () => {
   };
   const { name, title, release_date, poster_path, vote_average, overview, genres } = state;
   return (
-    <div>
-      <button type="button" onClick={onGoBack}>
+    <MovieDetailsWrapper>
+      <button className="Button" type="button" onClick={onGoBack}>
         Go back
       </button>
-      <div style={{ display: 'flex' }}>
+      <div className="movieDetailsContent">
         <img
+          className="movieDetailsImg"
           src={
             poster_path
               ? `https://www.themoviedb.org/t/p/w600_and_h900_bestv2${poster_path}`
@@ -48,7 +50,7 @@ const MovieDetailsPage = () => {
           width="600"
           height="900"
         ></img>
-        <div>
+        <div className="movieDetailsDescription">
           <h2>
             {title ? title : name}({release_date && release_date.slice(0, 4)})
           </h2>
@@ -56,27 +58,40 @@ const MovieDetailsPage = () => {
           <h3>Overview</h3>
           <p>{overview}</p>
           <h3>Genres</h3>
-          <ul>{genres && genres.map(item => <li key={item.id}>{item.name}</li>)}</ul>
+          <ul className="list movieDetailsGenresList">
+            {genres &&
+              genres.map(item => (
+                <li className="movieDetailsGenresListItem" key={item.id}>
+                  {item.name}
+                </li>
+              ))}
+          </ul>
         </div>
       </div>
-      <NavLink
-        to={{
-          pathname: `${match.url}/cast`,
-          state: { ...location.state },
-        }}
-        exact
-      >
-        Cast
-      </NavLink>
-      <NavLink
-        to={{
-          pathname: `${match.url}/reviews`,
-          state: { ...location.state },
-        }}
-        exact
-      >
-        Reviews
-      </NavLink>
+      <div className="linkWrapper">
+        <NavLink
+          to={{
+            pathname: `${match.url}/cast`,
+            state: { ...location.state },
+          }}
+          exact
+          className="movieDetailsLink"
+          activeClassName="movieDetailsLinkActive"
+        >
+          Cast
+        </NavLink>
+        <NavLink
+          to={{
+            pathname: `${match.url}/reviews`,
+            state: { ...location.state },
+          }}
+          exact
+          className="movieDetailsLink"
+          activeClassName="movieDetailsLinkActive"
+        >
+          Reviews
+        </NavLink>
+      </div>
       <div>
         <Suspense fallback={<div>Loading...</div>}>
           <Switch>
@@ -85,12 +100,8 @@ const MovieDetailsPage = () => {
             ))}
           </Switch>
         </Suspense>
-        {/* <Switch>
-          <Route path={`/movies/${state.id}/cast`} exact component={Cast}></Route>
-          <Route path={`/movies/${state.id}/reviews`} exact component={Reviews}></Route>
-        </Switch> */}
       </div>
-    </div>
+    </MovieDetailsWrapper>
   );
 };
 

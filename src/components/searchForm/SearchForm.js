@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import SearchFormWrapper from './SearchFormStyled';
 const SearchForm = ({ getMovies }) => {
   const [query, setQuery] = useState('');
   const onHandleInput = e => {
@@ -9,10 +10,22 @@ const SearchForm = ({ getMovies }) => {
     getMovies(query);
   };
   return (
-    <form onSubmit={onFormSubmit}>
-      <input type="text" autoComplete="off" autoFocus placeholder="Search movies" onChange={onHandleInput} value={query} />
-      <button type="submit">Search</button>
-    </form>
+    <SearchFormWrapper>
+      <form className="SearchForm" onSubmit={onFormSubmit}>
+        <input
+          className="SearchForm-input"
+          type="text"
+          autoComplete="off"
+          autoFocus
+          placeholder="Search movies"
+          onChange={onHandleInput}
+          value={query}
+        />
+        <button className="SearchForm-button" type="submit">
+          Search
+        </button>
+      </form>
+    </SearchFormWrapper>
   );
 };
 
