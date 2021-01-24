@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import ApiServicesClass from '../api/api';
 import MovieGallery from '../components/movieGallery/MovieGallery';
 import SearchForm from '../components/searchForm/SearchForm';
@@ -14,6 +14,7 @@ const initialState = {
 const MoviesPage = () => {
   const [state, setState] = useState({ ...initialState });
   const api = new ApiServicesClass();
+  const history = useHistory();
   const location = useLocation();
   const getMovies = async (query, page = 1) => {
     try {
@@ -22,13 +23,17 @@ const MoviesPage = () => {
       }
       const result = await api.fetchMovies(query, page);
       console.log(result);
-      setState(prevState => ({
+      await setState(prevState => ({
         ...prevState,
         movies: [...result.results],
         page: 1,
         query: query,
         maxpages: result.total_pages,
       }));
+      history.push({
+        ...history,
+        search: `?query=${query}`,
+      });
     } catch (error) {
       setState(prevState => ({ ...prevState, error: error }));
     }
@@ -53,12 +58,12 @@ const MoviesPage = () => {
     // !state.query && setState(prevState);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  const { movies, page } = state;
+  const { movies, page, query } = state;
   return (
     <>
       <h2>Movies page</h2>
       <SearchForm getMovies={getMovies} />
-      <MovieGallery movies={movies} page={page} />
+      <MovieGallery movies={movies} page={page} query={query} />
       {movies.length > 0 &&
         Array.from({ length: state.maxpages }, (v, k) => k + 1).map(item => (
           <button key={item} type="button" onClick={pagination}>

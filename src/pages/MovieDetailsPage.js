@@ -24,8 +24,7 @@ const MovieDetailsPage = () => {
       pathname: history.location.state.from,
       search: '',
       hash: '',
-      state: { from: location.pathname, query: 'batman' },
-      hello: 'from about',
+      state: { from: location.pathname, query: location.state.query },
       page: history.location.state.page,
     });
   };

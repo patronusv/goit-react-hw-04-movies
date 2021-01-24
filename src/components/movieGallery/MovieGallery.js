@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useLocation, useRouteMatch } from 'react-router-dom';
-const MovieGallery = ({ movies, page }) => {
+const MovieGallery = ({ movies, page, query }) => {
   const location = useLocation();
   const match = useRouteMatch();
   return (
@@ -14,6 +14,7 @@ const MovieGallery = ({ movies, page }) => {
                 from: location.pathname,
                 movieId: item.id,
                 page: page,
+                query: query,
               },
             }}
           >
