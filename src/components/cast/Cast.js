@@ -29,7 +29,16 @@ const Cast = () => {
         {castToShow &&
           castToShow.map(item => (
             <li key={item.cast_id}>
-              <img src={`https://www.themoviedb.org/t/p/w138_and_h175_face/${item.profile_path}`} alt={`${item.name}`} />
+              <img
+                src={
+                  item.profile_path
+                    ? `https://www.themoviedb.org/t/p/w138_and_h175_face/${item.profile_path}`
+                    : 'https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-38-picture-grey-c2ebdbb057f2a7614185931650f8cee23fa137b93812ccb132b9df511df1cfac.svg'
+                }
+                alt={`${item.name}`}
+                width="138"
+                height="175"
+              />
               <h3>{item.name}</h3>
               <p>Character: {item.character}</p>
             </li>

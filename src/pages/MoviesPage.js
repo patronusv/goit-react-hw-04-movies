@@ -53,16 +53,23 @@ const MoviesPage = () => {
     if (!location.state) {
       return;
     } else {
-      location.state.query && getMovies(location.state.query, location.page);
+      location.state.query &&
+        getMovies(location.state.query, location.state.page).then(() => setState(prevState => ({ ...prevState, page: location.state.page })));
     }
-    // !state.query && setState(prevState);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   const { movies, page, query } = state;
   return (
     <>
       <h2>Movies page</h2>
       <SearchForm getMovies={getMovies} />
+      {movies.length > 0 &&
+        Array.from({ length: state.maxpages }, (v, k) => k + 1).map(item => (
+          <button key={item} type="button" onClick={pagination}>
+            {item}
+          </button>
+        ))}
       <MovieGallery movies={movies} page={page} query={query} />
       {movies.length > 0 &&
         Array.from({ length: state.maxpages }, (v, k) => k + 1).map(item => (

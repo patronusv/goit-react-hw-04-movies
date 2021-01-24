@@ -22,23 +22,32 @@ const MovieDetailsPage = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const onGoBack = () => {
-    console.log(history);
+    console.log('history:', history);
     history.push({
       pathname: history.location.state.from,
       search: '',
       hash: '',
-      state: { from: location.pathname, query: location.state.query },
+      state: { from: location.pathname, query: location.state.query, page: location.state.page },
       page: history.location.state.page,
     });
   };
-  const { name, title, release_date, poster_path, id, vote_average, overview, genres } = state;
+  const { name, title, release_date, poster_path, vote_average, overview, genres } = state;
   return (
     <div>
       <button type="button" onClick={onGoBack}>
         Shit! go back!
       </button>
       <div style={{ display: 'flex' }}>
-        <img src={`https://www.themoviedb.org/t/p/w600_and_h900_bestv2${poster_path}`} alt={title ? title : name}></img>
+        <img
+          src={
+            poster_path
+              ? `https://www.themoviedb.org/t/p/w600_and_h900_bestv2${poster_path}`
+              : 'https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-38-picture-grey-c2ebdbb057f2a7614185931650f8cee23fa137b93812ccb132b9df511df1cfac.svg'
+          }
+          alt={title ? title : name}
+          width="600"
+          height="900"
+        ></img>
         <div>
           <h2>
             {title ? title : name}({release_date && release_date.slice(0, 4)})
