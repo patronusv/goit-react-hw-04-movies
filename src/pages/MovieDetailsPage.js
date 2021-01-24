@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import ApiServicesClass from '../api/api';
-import { NavLink, Route, Switch, useHistory, useLocation } from 'react-router-dom';
-import Cast from '../components/cast/Cast';
-import Reviews from '../components/reviews/Reviews';
+import { NavLink, Route, Switch, useHistory, useLocation, useRouteMatch } from 'react-router-dom';
+// import Cast from '../components/cast/Cast';
+// import Reviews from '../components/reviews/Reviews';
+import movieDetailsRoutes from '../routes/movieDetailsRoutes';
 
 const MovieDetailsPage = () => {
   const [state, setState] = useState({});
+  const match = useRouteMatch();
+  console.log('match', match);
   const history = useHistory();
   const location = useLocation();
   const api = new ApiServicesClass();
@@ -49,7 +52,7 @@ const MovieDetailsPage = () => {
       </div>
       <NavLink
         to={{
-          pathname: `/movies/${id}/cast`,
+          pathname: `${match.url}/cast`,
           state: { ...location.state },
         }}
         exact
@@ -58,7 +61,7 @@ const MovieDetailsPage = () => {
       </NavLink>
       <NavLink
         to={{
-          pathname: `/movies/${state.id}/reviews`,
+          pathname: `${match.url}/reviews`,
           state: { ...location.state },
         }}
         exact
@@ -66,10 +69,17 @@ const MovieDetailsPage = () => {
         Reviews
       </NavLink>
       <div>
-        <Switch>
+        <Suspense fallback={<div>Loading...</div>}>
+          <Switch>
+            {movieDetailsRoutes.map(({ path, exact, component: MyComponent }) => (
+              <Route path={`${match.url}${path}`} exact={exact} key={path} render={() => <MyComponent />} />
+            ))}
+          </Switch>
+        </Suspense>
+        {/* <Switch>
           <Route path={`/movies/${state.id}/cast`} exact component={Cast}></Route>
           <Route path={`/movies/${state.id}/reviews`} exact component={Reviews}></Route>
-        </Switch>
+        </Switch> */}
       </div>
     </div>
   );
