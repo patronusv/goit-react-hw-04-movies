@@ -15,7 +15,7 @@ const HomePage = () => {
   const location = useLocation();
   return (
     <div>
-      <ul>
+      <ul style={{ display: 'flex', flexWrap: 'wrap' }}>
         {trending.map(item => (
           <li key={item.id}>
             <NavLink
@@ -27,8 +27,10 @@ const HomePage = () => {
                 },
               }}
             >
-              {item.name ? item.name : item.title}
+              <img src={`https://www.themoviedb.org/t/p/w220_and_h330_face${item.poster_path}`} alt={item.name ? item.name : item.title}></img>
+              <h3>{item.name ? item.name : item.title}</h3>
             </NavLink>
+            <p>{item.release_date}</p>
           </li>
         ))}
       </ul>

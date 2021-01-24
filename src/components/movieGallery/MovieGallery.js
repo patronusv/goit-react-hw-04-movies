@@ -18,8 +18,10 @@ const MovieGallery = ({ movies, page, query }) => {
               },
             }}
           >
-            {item.name ? item.name : item.title}
+            <img src={`https://www.themoviedb.org/t/p/w220_and_h330_face${item.poster_path}`} alt={item.name ? item.name : item.title}></img>
+            <h3>{item.name ? item.name : item.title}</h3>
           </Link>
+          <p>{item.release_date}</p>
         </li>
       ))}
     </ul>
