@@ -8,7 +8,7 @@ const Cast = () => {
   const api = new ApiServicesClass();
   const getMovieCast = async id => {
     const result = await api.fetchMovieCastById(id);
-    console.log(result);
+
     setState({ ...result, castToShow: result.cast.slice(0, 10) });
   };
   useEffect(() => {
@@ -16,10 +16,7 @@ const Cast = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const showAllCast = () => {
-    console.log('before', state);
-
     setState(prevState => ({ ...prevState, castToShow: [...prevState.cast] }));
-    console.log('after', state);
   };
   const { castToShow, cast } = state;
 

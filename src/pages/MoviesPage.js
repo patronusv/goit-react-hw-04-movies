@@ -24,7 +24,7 @@ const MoviesPage = () => {
         return;
       }
       const result = await api.fetchMovies(query, page);
-      console.log(result);
+
       await setState(prevState => ({
         ...prevState,
         movies: [...result.results],
@@ -42,7 +42,7 @@ const MoviesPage = () => {
   };
   const pagination = async e => {
     const page = Number(e.target.textContent);
-    console.log(page);
+
     await getMovies(state.query, page);
     setState(prevState => ({
       ...prevState,
@@ -50,8 +50,6 @@ const MoviesPage = () => {
     }));
   };
   useEffect(() => {
-    // console.log(`searching for ${location.state.query} page ${location.page}`);
-    console.log(location);
     if (!location.state) {
       return;
     } else {

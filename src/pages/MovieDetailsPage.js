@@ -9,13 +9,13 @@ import MovieDetailsWrapper from './MovieDetailsPageStyled';
 const MovieDetailsPage = () => {
   const [state, setState] = useState({});
   const match = useRouteMatch();
-  console.log('match', match);
+
   const history = useHistory();
   const location = useLocation();
   const api = new ApiServicesClass();
   const getMovieDetails = async id => {
     const result = await api.fetchMovieById(id);
-    console.log(result);
+
     setState({ ...result });
   };
   useEffect(() => {
@@ -23,7 +23,6 @@ const MovieDetailsPage = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const onGoBack = () => {
-    console.log('history:', history);
     history.push({
       pathname: history.location.state.from,
       search: '',

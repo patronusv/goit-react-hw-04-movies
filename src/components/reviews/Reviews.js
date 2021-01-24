@@ -10,7 +10,7 @@ const Reviews = () => {
   const api = new ApiServicesClass();
   const getMovieReviews = async id => {
     const result = await api.fetchMovieReviewsById(id);
-    console.log(result);
+
     setState({ ...result });
   };
   useEffect(() => {
