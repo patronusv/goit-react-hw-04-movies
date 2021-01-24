@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link, useLocation, useRouteMatch } from 'react-router-dom';
 import MovieGalleryWrapper from './MovieGalleryStyled';
 const MovieGallery = ({ movies, page, query }) => {
@@ -43,3 +44,8 @@ const MovieGallery = ({ movies, page, query }) => {
 };
 
 export default MovieGallery;
+MovieGallery.propTypes = {
+  movies: PropTypes.array.isRequired,
+  page: PropTypes.string.isRequired,
+  query: PropTypes.array.isRequired,
+};

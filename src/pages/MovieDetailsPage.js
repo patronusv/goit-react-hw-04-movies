@@ -1,8 +1,7 @@
 import React, { Suspense, useEffect, useState } from 'react';
-import ApiServicesClass from '../api/api';
 import { NavLink, Route, Switch, useHistory, useLocation, useRouteMatch } from 'react-router-dom';
-// import Cast from '../components/cast/Cast';
-// import Reviews from '../components/reviews/Reviews';
+
+import ApiServicesClass from '../api/api';
 import movieDetailsRoutes from '../routes/movieDetailsRoutes';
 import MovieDetailsWrapper from './MovieDetailsPageStyled';
 

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import SearchFormWrapper from './SearchFormStyled';
+import PropTypes from 'prop-types';
 const SearchForm = ({ getMovies }) => {
   const [query, setQuery] = useState('');
   const onHandleInput = e => {
@@ -30,3 +31,6 @@ const SearchForm = ({ getMovies }) => {
 };
 
 export default SearchForm;
+SearchForm.propTypes = {
+  getMovies: PropTypes.func.isRequired,
+};
